@@ -5,9 +5,8 @@
   "repository": "git@github.com:hieuvu1805/vinode.git",
   "author": "Hieu Vu",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "migration": "node db/migration.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
