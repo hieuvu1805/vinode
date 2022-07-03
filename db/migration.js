@@ -1,36 +1,22 @@
-const { sequelize, Sequelize } = require("./index.js");
+const sequelize = require("./db.js");
 
-// create Tracking table
-sequelize.define(
-  "Tracking",
-  {
-    visitor: {
-      type: Sequelize.STRING,
-    },
-    mobile: {
-      type: Sequelize.STRING,
-    },
-    meet: {
-      type: Sequelize.STRING,
-    },
-    purpose: {
-      type: Sequelize.STRING,
-    },
-    in_time: {
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW,
-    },
-    out_time: {
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW,
-    },
-  },
-  {
-    timestamps: false,
-  }
-);
+// require all models
+const normalizedPath = require("path").join(__dirname, "models");
+require("fs")
+  .readdirSync(normalizedPath)
+  .forEach(function (file) {
+    require("./models/" + file);
+  });
 
-sequelize.sync().then(() => {
-  console.log("Migration complete!");
-  sequelize.close();
-});
+// run migration
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Migration complete!");
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+  .finally(() => {
+    sequelize.close();
+  });
