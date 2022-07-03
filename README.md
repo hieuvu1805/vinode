@@ -15,7 +15,7 @@
 
 1. Test query
 
-```json
+```graphql
 {
   hello
 }
@@ -23,7 +23,7 @@
 
 1. Query `trackings`
 
-```json
+```graphql
 {
   trackings(limit: 10) {
     id
@@ -37,16 +37,18 @@
 }
 ```
 
-2. Mutation `checkin`
+1. Mutation `checkin`
 
-```json
+```graphql
 mutation Checkin {
-  checkin(input:{
-    visitor: "visitor",
-    mobile: "01234567",
-    meet: "meet",
-    purpose: OTHER
-  }) {
+  checkin(
+    input: {
+      visitor: "visitor"
+      mobile: "01234567"
+      meet: "meet"
+      purpose: OTHER
+    }
+  ) {
     id
     visitor
     mobile
@@ -60,7 +62,7 @@ mutation Checkin {
 
 3. Mutation `checkout`
 
-```
+```graphql
 mutation Checkout {
   checkout(id: ID!)
 }
